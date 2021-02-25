@@ -7,8 +7,17 @@ typedef long long ll;
 
 int main()
 {
-    int N;
-    cin >> N;
-    cout << (1+N)*N/2 <<endl;
+    ll N, S, D;
+    ll X, Y;
+    cin >> N >> S >> D;
+    for (ll i=0; i<N; ++i) {
+        cin >> X >> Y;
+        if( X<S && Y>D) {
+            cout<<"Yes"<<endl;
+            return 0;
+        }
+    }
+    cout<<"No"<<endl;
+
     return 0;
 }

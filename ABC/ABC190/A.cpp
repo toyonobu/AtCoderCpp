@@ -7,8 +7,9 @@ typedef long long ll;
 
 int main()
 {
-    int N;
-    cin >> N;
-    cout << (1+N)*N/2 <<endl;
+    int A, B, C;
+    cin >> A >> B >> C;
+    A += C;
+    cout << (A > B ? "Takahashi" : "Aoki")<<endl;
     return 0;
 }
