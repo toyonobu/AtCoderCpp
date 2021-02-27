@@ -4,16 +4,9 @@ using namespace std;
 #define PRINT_YesNo(condition) cout<<((condition)?"Yes":"No")<<endl
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
-#define SET_PRECISION(x) cout<< fixed << setprecision((x))
 
 typedef long long ll;
-typedef vector<int> vi_t;
-typedef vector<vector<int> > vvi_t;
-typedef vector<ll> vl_t;
-typedef vector<vector<ll> > vvl_t;
-
 string dec2Naray(ll x, int n);
-vi_t str2numvec(const std::string& str);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -21,6 +14,27 @@ vi_t str2numvec(const std::string& str);
 int main()
 {
     __MAGIC__;
+    ll N, M, T;
+    cin >> N >> M >> T;
+
+    ll power = N;
+    ll now = 0, A, B, diff;
+    for(ll i=0; i<M; ++i) {
+        cin >> A >> B;
+        diff = A - now;
+        if(power <= diff) {
+            cout << "No" << endl;
+            return 0;
+        }
+        power -= diff;
+        now = A;
+
+        diff = B-A;
+        now = B;
+        power = min( N, power + diff);
+    }
+    diff = T - B;
+    PRINT_YesNo( power > diff );
 
     return 0;
 }
@@ -40,13 +54,4 @@ string dec2Naray(ll x, int n)
         x /= n;
     }
     return s;
-}
-
-vi_t str2numvec(const std::string& str)
-{
-    vi_t v(str.size());
-    for(int i=0, n=str.size(); i<n; ++i) {
-        v[i] = str[i] - '0';
-    }
-    return v;
 }

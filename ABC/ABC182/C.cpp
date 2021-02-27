@@ -21,6 +21,40 @@ vi_t str2numvec(const std::string& str);
 int main()
 {
     __MAGIC__;
+    string S;
+    cin >> S;
+    auto v = str2numvec(S);
+    vi_t ideal(3);
+    ll ideal_sum=0;
+    for (const auto& x : v) {
+        ideal_sum += x%3;
+        ideal_sum = ideal_sum%3;
+        ++ideal[x%3];
+    }
+
+    int N = S.size();
+
+    if (ideal_sum == 0) {
+        cout << "0" << endl;
+        return 0;
+    } else if (ideal_sum == 2) {
+        if (N>1 && ideal[2]) {
+            cout << "1" <<endl;
+            return 0;
+        } else if (N>2 && ideal[1] >= 2) {
+            cout << "2" << endl;
+            return 0;
+        }
+    } else {//ideal_sum==1
+        if (N>1 && ideal[1]) {
+            cout << "1" <<endl;
+            return 0;
+        } else if (N>2 && ideal[2] >= 2) {
+            cout << "2" << endl;
+            return 0;
+        }
+    }
+    cout << "-1" << endl;
 
     return 0;
 }

@@ -7,13 +7,7 @@ using namespace std;
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
 
 typedef long long ll;
-typedef vector<int> vi_t;
-typedef vector<vector<int> > vvi_t;
-typedef vector<ll> vl_t;
-typedef vector<vector<ll> > vvl_t;
-
 string dec2Naray(ll x, int n);
-vi_t str2numvec(const std::string& str);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -21,6 +15,39 @@ vi_t str2numvec(const std::string& str);
 int main()
 {
     __MAGIC__;
+    ll N, K, tmp;
+    cin >> N >> K;
+
+    vector<vector<ll> > d(N);
+    for (int i=0; i<N; ++i) {
+        d[i] = std::vector<ll>(N);
+        for (int j=0; j<N; ++j) {
+            cin >> tmp;
+            d[i][j] = tmp;
+        }
+    }
+
+    vector<int> v(N-1);
+    for(int i=1; i<N; ++i) {
+        v[i-1]=i+1;
+    }
+
+
+    int result=0;
+    do {
+        ll sum=0;
+        int now = 1;
+        for(auto& x :v) {
+            sum += d[now-1][x-1];
+            now = x;
+        }
+        sum += d[now-1][0];
+
+        if ( sum == K ) ++result;
+
+    } while( next_permutation(v.begin(), v.end()) );
+
+    cout << result << endl;
 
     return 0;
 }
@@ -40,13 +67,4 @@ string dec2Naray(ll x, int n)
         x /= n;
     }
     return s;
-}
-
-vi_t str2numvec(const std::string& str)
-{
-    vi_t v(str.size());
-    for(int i=0, n=str.size(); i<n; ++i) {
-        v[i] = str[i] - '0';
-    }
-    return v;
 }

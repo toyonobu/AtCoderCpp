@@ -7,13 +7,7 @@ using namespace std;
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
 
 typedef long long ll;
-typedef vector<int> vi_t;
-typedef vector<vector<int> > vvi_t;
-typedef vector<ll> vl_t;
-typedef vector<vector<ll> > vvl_t;
-
 string dec2Naray(ll x, int n);
-vi_t str2numvec(const std::string& str);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -21,6 +15,28 @@ vi_t str2numvec(const std::string& str);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+    vector<int> v(N);
+    for(auto& x : v) cin >> x;
+
+    int n_gcd=0;
+    int max_gcd=0;
+    int result=0;
+    int max_itr = *max_element(v.begin(), v.end());
+    for(int k=2; k<=max_itr; ++k) {
+        n_gcd=0;
+        for (auto& x :v) {
+            if( x%k == 0) {
+                ++n_gcd;
+            }
+        }
+        if(n_gcd > max_gcd) {
+            max_gcd = n_gcd;
+            result=k;
+        }
+    }
+    cout<<result<<endl;
 
     return 0;
 }
@@ -40,13 +56,4 @@ string dec2Naray(ll x, int n)
         x /= n;
     }
     return s;
-}
-
-vi_t str2numvec(const std::string& str)
-{
-    vi_t v(str.size());
-    for(int i=0, n=str.size(); i<n; ++i) {
-        v[i] = str[i] - '0';
-    }
-    return v;
 }
