@@ -22,6 +22,9 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+    cout << ((N%2) ? "Black" : "White") << endl;
 
     return 0;
 }

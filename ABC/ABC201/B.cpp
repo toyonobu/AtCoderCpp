@@ -22,6 +22,15 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+
+    std::vector<std::pair<int, std::string> > v(N);
+    for(int i=0; i<N; ++i) {
+        cin >> v[i].second >> v[i].first;
+    }
+    std::sort(v.begin(), v.end());
+    std::cout << v[N-2].second <<endl;
 
     return 0;
 }

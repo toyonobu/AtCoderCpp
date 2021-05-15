@@ -22,6 +22,43 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    vi_t need;
+    vi_t deny;
+
+
+    std::string s;
+    cin >> s;
+
+    for(int i=0; i<10; ++ i) {
+        if( s[i] == 'o') need.push_back(i);
+        if( s[i] == 'x') deny.push_back(i);
+    }
+
+    int result = 0;
+
+    for(int i=0; i<10000; ++i) {
+        s = "";
+        if(i<10) s+="0";
+        if(i<100) s+="0";
+        if(i<1000) s+="0";
+        s += std::to_string(i);
+        auto v = str2numvec(s);
+
+        if( std::find(deny.begin(), deny.end(), v[0]) != deny.end()) continue;
+        if( std::find(deny.begin(), deny.end(), v[1]) != deny.end()) continue;
+        if( std::find(deny.begin(), deny.end(), v[2]) != deny.end()) continue;
+        if( std::find(deny.begin(), deny.end(), v[3]) != deny.end()) continue;
+
+        bool found=false;
+        for(auto x : need) {
+            if( std::find(v.begin(), v.end(), x) == v.end()) found=true;
+        }
+        if(found) continue;
+
+        ++result;
+    }
+
+    cout<< result << endl;
 
     return 0;
 }

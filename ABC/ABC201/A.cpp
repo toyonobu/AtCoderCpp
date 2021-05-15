@@ -14,6 +14,7 @@ typedef vector<vector<ll> > vvl_t;
 
 string dec2Naray(ll x, int n);
 vi_t str2numvec(const std::string& str);
+vector<string> split(const string &str, char delim);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -21,17 +22,11 @@ vi_t str2numvec(const std::string& str);
 int main()
 {
     __MAGIC__;
-    ll N;
-    cin>>N;
+    vi_t v(3);
+    cin >> v[0]>> v[1] >> v[2];
+    std::sort(v.begin(), v.end());
 
-    ll i=0;
-    while(true) {
-        ++i;
-        if(stoll(to_string(i) + to_string(i)) > N){
-            cout << i - 1 << endl;
-            break;
-        }
-    }
+    cout << ( (v[1]-v[0] == v[2]-v[1]) ? "Yes" : "No") << endl;
 
     return 0;
 }
@@ -60,4 +55,15 @@ vi_t str2numvec(const std::string& str)
         v[i] = str[i] - '0';
     }
     return v;
+}
+
+vector<string> split(const string &str, char delim){
+  vector<string> res;
+  size_t current = 0, found;
+  while((found = str.find_first_of(delim, current)) != string::npos){
+    res.push_back(string(str, current, found - current));
+    current = found + 1;
+  }
+  res.push_back(string(str, current, str.size() - current));
+  return res;
 }

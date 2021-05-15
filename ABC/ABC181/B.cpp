@@ -22,6 +22,16 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    ll N;
+    cin >> N;
+
+    ll A, B;
+    ll res = 0;
+    for(int i=0; i<N; ++i) {
+        cin >> A >> B;
+        res += (A+B)*(B-A+1)*0.5;
+    }
+    cout << res << endl;
 
     return 0;
 }
