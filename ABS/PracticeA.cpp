@@ -24,6 +24,10 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int a, b, c;
+    string s;
+    cin >> a >> b >> c >> s;
+    cout << a+b+c << " " << s << endl;
 
     return 0;
 }

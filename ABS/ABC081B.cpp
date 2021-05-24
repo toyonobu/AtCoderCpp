@@ -24,6 +24,25 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+    vl_t v(N);
+    for(auto& x:v) cin >> x;
+
+    int i=0;
+    bool breakFlag = false;
+    while(true) {
+        for(auto& x:v) {
+            if (x%2) {
+                breakFlag=true;
+                break;
+            }
+            x = x / 2;
+        }
+        if(breakFlag) break;
+        ++i;
+    }
+    cout << i <<endl;
 
     return 0;
 }

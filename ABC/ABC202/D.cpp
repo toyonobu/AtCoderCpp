@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
+#include <boost/dynamic_bitset.hpp>
 using namespace std;
 
 #define PRINT_YesNo(condition) cout<<((condition)?"Yes":"No")<<endl
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
-#define REP(i, n) for (int i = 0; i < (int)(n); i++)
-
 
 typedef long long ll;
 typedef vector<int> vi_t;
@@ -18,12 +17,29 @@ string dec2Naray(ll x, int n);
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
 
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
 int main()
 {
     __MAGIC__;
+    ll A, B, K;
+    cin >> A >> B >> K;
+
+    std::vector<std::string> v;
+    for(int i=0;i<A;++i) v.push_back("a");
+    for(int i=0;i<B;++i) v.push_back("b");
+    int i=0;
+    do{
+        ++i;
+        if(i==K) {
+            for(auto& x: v) {
+                cout << x;
+            }
+            cout<<endl;
+        }
+    }while(next_permutation(v.begin(),v.end()));
 
     return 0;
 }

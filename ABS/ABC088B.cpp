@@ -24,6 +24,19 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+    vi_t A(N);
+    for(auto&x : A) cin >> x;
+    std::sort(A.begin(), A.end(), std::greater<int>{});
+
+    int i=0;
+    int result=0;
+    for(const auto& x : A) {
+        result += x * (i%2 ? -1 : 1);
+        ++i;
+    }
+    cout << result << endl;
 
     return 0;
 }

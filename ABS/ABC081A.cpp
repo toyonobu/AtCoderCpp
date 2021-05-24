@@ -24,6 +24,10 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    string s;
+    cin >> s;
+    auto v = str2numvec(s);
+    cout << std::count(v.begin(), v.end(), 1) << endl;
 
     return 0;
 }

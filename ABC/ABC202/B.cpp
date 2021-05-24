@@ -5,8 +5,6 @@ using namespace std;
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
-#define REP(i, n) for (int i = 0; i < (int)(n); i++)
-
 
 typedef long long ll;
 typedef vector<int> vi_t;
@@ -24,7 +22,17 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
-
+    string s;
+    cin >> s;
+    for(size_t i = 0; i<s.size(); ++i) {
+        char ch = s[s.size()-i-1];
+        if (ch=='0') cout << '0';
+        if (ch=='1') cout << '1';
+        if (ch=='6') cout << '9';
+        if (ch=='8') cout << '8';
+        if (ch=='9') cout << '6';
+    }
+    cout << endl;
     return 0;
 }
 

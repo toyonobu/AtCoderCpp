@@ -24,7 +24,10 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
-
+    int H, W;
+    cin >> H >> W;
+    vi_t paths_with_n_blue(H+W);
+    
     return 0;
 }
 

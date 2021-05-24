@@ -24,6 +24,9 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int a, b;
+    cin >> a >> b;
+    cout << ( (a*b)%2 ? "Odd" : "Even") << endl;
 
     return 0;
 }

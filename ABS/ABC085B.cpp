@@ -24,6 +24,15 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N;
+    cin >> N;
+    int tmp;
+    std::set<int> s;
+    for(int i=0; i<N; ++i) {
+        cin >> tmp;
+        s.insert(tmp);
+    }
+    cout << s.size() << endl;
 
     return 0;
 }

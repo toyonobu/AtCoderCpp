@@ -24,6 +24,18 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N, A, B;
+    cin >> N >> A >> B;
+
+    int result=0;
+    for(int i=1; i<=N; ++i) {
+        auto v = str2numvec(to_string(i));
+        int sum = accumulate(v.begin(), v.end(), 0);
+        if( A > sum ) continue;
+        if( B < sum ) continue;
+        result += i;
+    }
+    cout << result << endl;
 
     return 0;
 }
