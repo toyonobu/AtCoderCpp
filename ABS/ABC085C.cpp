@@ -7,12 +7,14 @@ using namespace std;
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
 #define REP(i, n) for (int i = 0; i < (int)(n); i++)
 
+
 typedef long long ll;
 typedef vector<int> vi_t;
 typedef vector<vector<int> > vvi_t;
 typedef vector<ll> vl_t;
 typedef vector<vector<ll> > vvl_t;
 
+string dec2Naray(ll x, int n);
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
 
@@ -22,13 +24,39 @@ vector<string> split(const string &str, char delim);
 int main()
 {
     __MAGIC__;
+    int N, Y;
+    cin >> N >> Y;
 
+    for(int x=0;x<=N; ++x) {
+        for(int y=0; y<=N-x; ++y) {
+            int z = N - x - y;
+            if(10000*x + 5000*y + 1000*z == Y) {
+                cout << x << " " << y << " " << z << endl;
+                return 0;
+            }
+        }
+    }
+    cout << "-1 -1 -1" << endl;
     return 0;
 }
 
 //-----------------------------
 // ヘルパー関数群
 //-----------------------------
+string dec2Naray(ll x, int n)
+{
+    // 10進数 → n進数 変換を行う
+    // 9進数までにしか対応してないので注意
+    // 16進数ぐらいまでは拡張した方が良さそう
+    // n進数 → 10進数 変換も用意すべき
+    string s;
+    while( x ) {
+        s = to_string(x%n) + s;
+        x /= n;
+    }
+    return s;
+}
+
 vi_t str2numvec(const std::string& str)
 {
     vi_t v(str.size());
