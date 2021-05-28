@@ -5,6 +5,7 @@ using namespace std;
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
+#define REP(i, n) for (int i = 0; i < (int)(n); i++)
 
 typedef long long ll;
 typedef vector<int> vi_t;
@@ -12,7 +13,6 @@ typedef vector<vector<int> > vvi_t;
 typedef vector<ll> vl_t;
 typedef vector<vector<ll> > vvl_t;
 
-string dec2Naray(ll x, int n);
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
 
@@ -24,29 +24,17 @@ int main()
     __MAGIC__;
     int N;
     cin >> N;
-    vi_t A(N);
-    vi_t B(N);
-    vi_t B_c(N);
-
-    for(auto& x : A) cin >> x;
-    for(auto& x : B) cin >> x;
-    int c;
-    for( int i=0; i<N; ++i) {
-        cin >> c;
-        B_c[i] = B[c-1];
+    vl_t A(N);
+    vl_t M(200);
+    for(auto& x : A) {
+        cin >>x ;
+        ++M[x%200];
     }
-
-    vi_t n_of_B_c(N);
-    for( int i=0; i<N; ++i) {
-        ++n_of_B_c[B_c[i]];
-    }
-
     ll result=0;
-    for( int i=0; i<N; ++i) {
-        result += n_of_B_c[A[i]];
+    for(auto x : M) {
+        result += (x*(x-1)) / 2;
     }
-
-    cout << result <<endl;
+    cout << result << endl;
 
     return 0;
 }
@@ -54,20 +42,6 @@ int main()
 //-----------------------------
 // ヘルパー関数群
 //-----------------------------
-string dec2Naray(ll x, int n)
-{
-    // 10進数 → n進数 変換を行う
-    // 9進数までにしか対応してないので注意
-    // 16進数ぐらいまでは拡張した方が良さそう
-    // n進数 → 10進数 変換も用意すべき
-    string s;
-    while( x ) {
-        s = to_string(x%n) + s;
-        x /= n;
-    }
-    return s;
-}
-
 vi_t str2numvec(const std::string& str)
 {
     vi_t v(str.size());
