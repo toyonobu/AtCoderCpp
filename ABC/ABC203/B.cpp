@@ -21,9 +21,16 @@ vector<string> split(const string &str, char delim);
 //=====================//
 int main()
 {
-  __MAGIC__;
+    __MAGIC__;
+    int N, K;
+    cin >> N >> K;
 
-  return 0;
+    int res =0;
+    res += N*K*(K+1)/2;
+    res += 100 * K * N*(N+1)/2;
+    cout << res << endl;
+
+    return 0;
 }
 
 //-----------------------------
@@ -31,11 +38,11 @@ int main()
 //-----------------------------
 vi_t str2numvec(const std::string& str)
 {
-  vi_t v(str.size());
-  for(int i=0, n=str.size(); i<n; ++i) {
-      v[i] = str[i] - '0';
-  }
-  return v;
+    vi_t v(str.size());
+    for(int i=0, n=str.size(); i<n; ++i) {
+        v[i] = str[i] - '0';
+    }
+    return v;
 }
 
 vector<string> split(const string &str, char delim){

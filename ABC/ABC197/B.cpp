@@ -21,9 +21,22 @@ vector<string> split(const string &str, char delim);
 //=====================//
 int main()
 {
-  __MAGIC__;
+    __MAGIC__;
+    int H, W, X, Y;
+    cin >> H >> W >> X >> Y;
+    --X; --Y;
+    vector<string> S(H);
+    for( auto& x : S ) cin >> x;
 
-  return 0;
+    int res = -3;
+    for(int i=X; i<H  && S[i][Y]!='#'; ++i) ++res;
+    for(int i=X; i>=0 && S[i][Y]!='#'; --i) ++res;
+    for(int j=Y; j<W  && S[X][j]!='#'; ++j) ++res;
+    for(int j=Y; j>=0 && S[X][j]!='#'; --j) ++res;
+
+    cout << res << endl;
+
+    return 0;
 }
 
 //-----------------------------
@@ -31,11 +44,11 @@ int main()
 //-----------------------------
 vi_t str2numvec(const std::string& str)
 {
-  vi_t v(str.size());
-  for(int i=0, n=str.size(); i<n; ++i) {
-      v[i] = str[i] - '0';
-  }
-  return v;
+    vi_t v(str.size());
+    for(int i=0, n=str.size(); i<n; ++i) {
+        v[i] = str[i] - '0';
+    }
+    return v;
 }
 
 vector<string> split(const string &str, char delim){

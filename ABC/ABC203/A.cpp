@@ -21,9 +21,21 @@ vector<string> split(const string &str, char delim);
 //=====================//
 int main()
 {
-  __MAGIC__;
+    __MAGIC__;
+    int a, b, c;
+    cin >> a >> b >> c;
 
-  return 0;
+    if(a==b) {
+      cout << c << endl;
+    } else if(b==c) {
+      cout << a << endl;
+    } else if(a==c) {
+      cout << b << endl;
+    } else {
+      cout << 0 << endl;
+    }
+
+    return 0;
 }
 
 //-----------------------------
@@ -31,11 +43,11 @@ int main()
 //-----------------------------
 vi_t str2numvec(const std::string& str)
 {
-  vi_t v(str.size());
-  for(int i=0, n=str.size(); i<n; ++i) {
-      v[i] = str[i] - '0';
-  }
-  return v;
+    vi_t v(str.size());
+    for(int i=0, n=str.size(); i<n; ++i) {
+        v[i] = str[i] - '0';
+    }
+    return v;
 }
 
 vector<string> split(const string &str, char delim){

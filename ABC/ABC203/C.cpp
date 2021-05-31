@@ -12,6 +12,7 @@ typedef vector<int> vi_t;
 typedef vector<vector<int> > vvi_t;
 typedef vector<ll> vl_t;
 typedef vector<vector<ll> > vvl_t;
+typedef pair<ll, ll> pll_t;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
@@ -22,6 +23,26 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
+  ll N, money;
+  cin >> N >> money;
+  vector<pll_t> V(N);
+  for(auto& [x, y] : V) {
+    cin >> x >> y;
+  }
+  std::sort(V.begin(), V.end());
+
+  ll pos = 0;
+  for(auto [x, y] : V) {
+    if( pos + money < x ) {
+      cout << pos + money << endl;
+      return 0;
+    } else {
+      money = money + y - (x-pos);
+      pos = x;
+    }
+  }
+
+  cout << pos + money << endl;
 
   return 0;
 }
@@ -31,11 +52,11 @@ int main()
 //-----------------------------
 vi_t str2numvec(const std::string& str)
 {
-  vi_t v(str.size());
-  for(int i=0, n=str.size(); i<n; ++i) {
-      v[i] = str[i] - '0';
-  }
-  return v;
+    vi_t v(str.size());
+    for(int i=0, n=str.size(); i<n; ++i) {
+        v[i] = str[i] - '0';
+    }
+    return v;
 }
 
 vector<string> split(const string &str, char delim){
