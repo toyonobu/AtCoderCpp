@@ -30,7 +30,20 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  ll A, B, C, X, Y;
+  cin >> A >> B >> C >> X >> Y;
+
+  ll res = 50000000000;
+  for(ll nAB=0; nAB<=2*max(X,Y); nAB+=2) {
+    ll nA = max(X-nAB/2, (ll)0);
+    ll nB = max(Y-nAB/2, (ll)0);
+    ll sum= A*nA + B*nB + C*nAB;
+    if(sum < res) {
+      res = sum;
+    }
+  }
+  cout << res << endl;
+
   return 0;
 }
 
@@ -46,8 +59,7 @@ vi_t str2numvec(const std::string& str)
   return v;
 }
 
-vector<string> split(const string &str, char delim)
-{
+vector<string> split(const string &str, char delim){
   vector<string> res;
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){

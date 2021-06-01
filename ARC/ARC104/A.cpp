@@ -1,17 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#pragma GCC target("avx") // AtCoderはavx2に対応していないので注意
-#pragma GCC optimize("O3") // 最適化オプション
-#pragma GCC optimize("unroll-loops") // ループ展開
-#define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
-
-
 #define PRINT_YesNo(condition) cout<<((condition)?"Yes":"No")<<endl
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
+#define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
 #define REP(i, n) for (int i = 0; i < (int)(n); i++)
-#define ALL(x) (x).begin(), (x).end()
 
 using ll = long long;
 using vi_t  = vector<int>;
@@ -30,7 +24,10 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  int A, B;
+  cin >> A >> B;
+  cout << (A+B)/2 << " " << (A-B)/2 << endl;
+
   return 0;
 }
 
@@ -46,8 +43,7 @@ vi_t str2numvec(const std::string& str)
   return v;
 }
 
-vector<string> split(const string &str, char delim)
-{
+vector<string> split(const string &str, char delim){
   vector<string> res;
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){

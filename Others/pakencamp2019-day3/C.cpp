@@ -30,7 +30,27 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  int N, M;
+  cin >> N >> M;
+  vvl_t A(N);
+  for(auto& v : A) {
+      v.resize(M);
+      for(auto& x : v) cin >> x;
+  }
+
+  ll res = 0;
+  // O(N*M^2) ~ 10^6
+  for(int j1=0; j1<M-1; ++j1) {
+    for(int j2=j1; j2<M; ++j2) {
+      ll sum=0;
+      for(int i=0; i<N; ++i) {
+        sum += max(A[i][j1], A[i][j2]);
+      }
+      res = std::max(res, sum);
+    }
+  }
+  cout << res << endl;
+
   return 0;
 }
 
@@ -46,8 +66,7 @@ vi_t str2numvec(const std::string& str)
   return v;
 }
 
-vector<string> split(const string &str, char delim)
-{
+vector<string> split(const string &str, char delim){
   vector<string> res;
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){

@@ -27,8 +27,12 @@ int main()
     cin >> N;
     std::vector<pair<long, int> > X(N);
     std::vector<pair<long, int> > Y(N);
+    vl_t x(N);
+    vl_t y(N);
     for(int i=0; i<N; ++i) {
-        cin >> X[i].first >> Y[i].first;
+        cin >> x[i] >> y[i];
+        X[i].first = x[i];
+        Y[i].first = y[i];
         X[i].second = i;
         Y[i].second = i;
     }
@@ -54,12 +58,13 @@ int main()
     } else {
         S.insert( std::make_pair(min(Y[0].second,Y[N-2].second), max(Y[0].second,Y[N-2].second)) );
     }
-    vl_t d;
-    for(auto p : S) {
-        ll dx = std::abs( );
-        d.push_back();
-    }
 
+    vl_t d;
+    for(auto [m, M] : S) {
+        d.push_back( std::max(std::abs(x[M]-x[m]), std::abs(y[M]-y[m])) );
+    }
+    std::sort(d.rbegin(), d.rend());
+    cout << d[1] << endl;
 
     return 0;
 }

@@ -30,7 +30,21 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  int N;
+  cin >> N;
+
+  int res=0;
+  // O(n^2) ~ 10^4
+  for(int n=1; n<=N; ++n) {
+      if( n%2==0 ) continue;
+      int cnt=0;
+      for(int i=1; i<=n; ++i) {
+          if( n%i==0 ) ++cnt;
+      }
+      if( cnt == 8 ) ++res;
+  }
+  cout << res << endl;
+
   return 0;
 }
 
@@ -46,8 +60,7 @@ vi_t str2numvec(const std::string& str)
   return v;
 }
 
-vector<string> split(const string &str, char delim)
-{
+vector<string> split(const string &str, char delim){
   vector<string> res;
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){

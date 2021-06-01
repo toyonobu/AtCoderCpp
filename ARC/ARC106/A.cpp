@@ -30,7 +30,21 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  ll N;
+  cin >> N;
+
+  for(ll A=0; A<40; ++A) {
+      for(ll B=0; B<30; ++B) {
+        if (std::pow(3, A) + std::pow(5, B) == N ) {
+            cout << A << " " << B << endl;
+            return 0;
+        } else if (std::pow(3, A) + std::pow(5, B) > N) {
+            continue;
+        }
+      }
+  }
+    cout << "-1" << endl;
+
   return 0;
 }
 

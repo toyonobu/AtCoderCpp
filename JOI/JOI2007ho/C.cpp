@@ -24,13 +24,55 @@ using pll_t = pair<ll, ll>;
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
 
+bool check(const pii_t& c, const pii_t& d, const vvi_t& P)
+{
+    if( c.first<0 || c.first>5000 || c.second<0 || c.second>5000) return false;
+    if( d.first<0 || d.first>5000 || d.second<0 || d.second>5000) return false;
+    if ( !P[c.first][c.second] || !P[d.first][d.second]) return false;
+
+    return true;
+}
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
 int main()
 {
+  //
+  // 2021.06.11
+  // 101 MB > 64 MB でなんとMLE, memory 使用率を抑える必要あり
+  //
   __MAGIC__;
-  
+  int n;
+  cin >> n;
+  vector<pii_t> v(n);
+  vvi_t P(5001, vector<int>(5001));
+
+  for(auto& [x, y] : v) {
+    cin >> x >> y;
+    P[x][y]=1;
+  }
+  sort(ALL(v));
+
+  int res=0;
+  for(int i=0; i<n-1; ++i) {
+    for(int j=i+1; j<n; ++j) {
+      auto [ax, ay] = v[i];
+      auto [bx, by] = v[j];
+      int dx = bx - ax;
+      int dy = by - ay;
+
+      pii_t C = make_pair(ax+dy, ay-dx);
+      pii_t D = make_pair(ax+dx+dy, ay+dy-dx);
+      pii_t E = make_pair(ax-dy, ay+dx);
+      pii_t F = make_pair(ax+dx-dy, ay+dy+dx);
+      if( check(C, D, P) || check(E, F, P) ) {
+        ++res;
+      }
+    }
+  }
+  cout << res << endl;
+
   return 0;
 }
 

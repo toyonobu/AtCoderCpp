@@ -23,6 +23,7 @@ using pll_t = pair<ll, ll>;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
+string to_string_with0(ll num, int width);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -30,7 +31,26 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  int N;
+  string S;
+  cin >> N >> S;
+
+  int res=0;
+  for(int i=0; i<1000; ++i) {
+    string tmp = S;
+    string s = to_string_with0(i,3);
+    auto pos = tmp.find_first_of(s[0]);
+    if( pos==string::npos ) continue;
+    tmp = tmp.substr(pos+1);
+    pos = tmp.find_first_of(s[1]);
+    if( pos==string::npos ) continue;
+    tmp = tmp.substr(pos+1);
+    pos = tmp.find_first_of(s[2]);
+    if( pos==string::npos ) continue;
+    ++res;
+  }
+  cout << res << endl;
+
   return 0;
 }
 
@@ -52,8 +72,14 @@ vector<string> split(const string &str, char delim)
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){
     res.push_back(string(str, current, found - current));
-    current = found + 1;
+    current = found ;
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
+}
+
+string to_string_with0(ll num, int width) {
+  std::stringstream ss;
+  ss << std::setfill('0') << std::setw(width) << num;
+  return ss.str();
 }

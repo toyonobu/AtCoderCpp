@@ -30,7 +30,23 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  string S;
+  cin >> S;
+
+  string res="";
+  int M = 0;
+  // O(n^2) ~ 10^2
+  for(size_t iB=0; iB<S.size(); ++iB) {
+    int len=0;
+    for(size_t iE=0; iB+iE<S.size(); ++iE) {
+        char ch = S[iB+iE];
+        if( ch!='A' && ch!='C' && ch!='G' && ch!='T') break;
+        ++len;
+        if(len > M) M=len;
+    }
+  }
+  cout << M << endl;
+
   return 0;
 }
 
@@ -46,8 +62,7 @@ vi_t str2numvec(const std::string& str)
   return v;
 }
 
-vector<string> split(const string &str, char delim)
-{
+vector<string> split(const string &str, char delim){
   vector<string> res;
   size_t current = 0, found;
   while((found = str.find_first_of(delim, current)) != string::npos){
