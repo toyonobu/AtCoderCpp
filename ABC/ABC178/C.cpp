@@ -32,7 +32,9 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
+  int N;
+  cin >> N;
+
   
   
   return 0;

@@ -32,8 +32,21 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
+  int N;
+  cin >> N;
+  vi_t A(N);
+  for(auto& x : A) cin >> x;
+
+  int M=0;
+  // O(n^2) ~ 10^8
+  REP(i, N) {
+    int m=INT_MAX;
+    for(int j=i; j<N; ++j) {
+      chmin(m, A[j]);
+      chmax(M, (j-i+1)*m);
+    }
+  }
+  cout << M << endl;
   
   return 0;
 }

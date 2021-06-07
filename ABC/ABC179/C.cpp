@@ -32,9 +32,18 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  int N;
+  cin >> N;
+
+  ll res=0;
+  for(int a=1; a<=N; ++a) {
+      double n = N/a;
+      for(int b=1; b<=n; ++b) {
+        if( N-a*b > 0) ++res;
+      }
+  }
+  cout << res << endl;
+
   return 0;
 }
 

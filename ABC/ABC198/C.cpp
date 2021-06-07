@@ -32,9 +32,14 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll R, X, Y;
+  cin >> R >> X >> Y;
+  double d = sqrt(X*X + Y*Y);
+  if (d<R) {
+    cout << 2 << endl;
+  } else {
+    cout << ceil(d/R) << endl;
+  }
   return 0;
 }
 

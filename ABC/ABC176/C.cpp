@@ -32,8 +32,17 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
+  int N;
+  cin >> N;
+  ll res=0;
+  ll M = 0;
+  ll A;
+  REP(i, N) {
+    cin >> A;
+    chmax(M, A);
+    res += M-A;
+  }
+  cout << res << endl;
   
   return 0;
 }

@@ -12,8 +12,6 @@ using namespace std;
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
 #define REP(i, n) for (int i = 0; i < (int)(n); i++)
 #define ALL(x) (x).begin(), (x).end()
-template<class T>bool chmax(T &a, const T &b) { if (b>a) { a=b; return true; } else return false;}
-template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return true; } else return false;}
 
 using ll = long long;
 using vi_t  = vector<int>;
@@ -32,9 +30,32 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll N, Q;
+  string S;
+  cin >> N >> S >> Q;
+  string pre = S.substr(0, N);
+  string post = S.substr(N);
+
+  ll T, A, B;
+  REP(i, Q) {
+    cin >> T >> A >> B;
+    if(T==1) {
+      --A;
+      --B;
+      if(B<N) {
+        swap(pre[A], pre[B]);
+      } else if(A<N) {
+        swap(pre[A], post[B-N]);
+      } else {
+        swap(post[A-N], post[B-N]);
+      }
+    } else {
+      swap(pre, post);
+    }
+  }
+  cout << pre << post << endl;
+
+
   return 0;
 }
 

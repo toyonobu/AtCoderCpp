@@ -26,15 +26,36 @@ using pll_t = pair<ll, ll>;
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
 
+vl_t divisor(ll n)
+{
+  vl_t res;
+  for(ll i=1; i*i<=n; ++i) {
+    if( n%i==0 ) {
+      res.push_back(i);
+      if( i*i!=n ) {
+        res.push_back(n/i);
+      }
+    }
+  }
+  sort(res.begin(), res.end());
+  return res;
+}
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll N;
+  cin >> N;
+
+  auto res = divisor(N);
+
+  for(const auto& x : res) {
+    cout << x << endl;
+  }
+
   return 0;
 }
 
