@@ -33,12 +33,12 @@ int main()
   ll N;
   cin >> N;
 
-  for(ll A=0; A<40; ++A) {
-      for(ll B=0; B<30; ++B) {
-        if (std::pow(3, A) + std::pow(5, B) == N ) {
+  for(ll A=1; A<40; ++A) {
+      for(ll B=1; B<30; ++B) {
+        if (powl(3, A) + powl(5, B) == N ) {
             cout << A << " " << B << endl;
             return 0;
-        } else if (std::pow(3, A) + std::pow(5, B) > N) {
+        } else if (powl(3, A) + powl(5, B) > N) {
             continue;
         }
       }

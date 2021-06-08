@@ -1,6 +1,8 @@
 # vs code cache
 .vscode
 
+# test file
+
 # Prerequisites
 *.d
 
@@ -36,3 +38,4 @@
 
 # test file
 input.txt
+test
