@@ -37,9 +37,19 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll S, P;
+  cin >> S >> P;
+
+  double p = sqrt(P);
+  for(ll n=1; n<=p; ++n) {
+    ll m = S-n;
+    if( n*m == P ) {
+      cout << "Yes" << endl;
+      return 0;
+    }
+  }
+  cout << "No" << endl;
+
   return 0;
 }
 

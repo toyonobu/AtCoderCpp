@@ -37,9 +37,13 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  int a, b, c;
+  cin >> a >> b >> c;
+  mint A(a), B(b), C(c);
+
+  mint res = A*(A+1) * B*(B+1) * C*(C+1) / 8;
+  cout << res.val() << endl;
+
   return 0;
 }
 
