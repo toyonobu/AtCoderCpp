@@ -38,14 +38,22 @@ int main()
 {
   __MAGIC__;
   int N, M;
-  cin >> N >> N;
-  vi_t ng(N);
-  int a;
-  REP(i, M)
-  {
-    cin >> a;
+  cin >> N >> M;
+
+  int left  = 1;
+  int right = N;
+  int L, R;
+  REP(i, N) {
+    cin >> L >> R;
+    if( L > right || R < left ) {
+        cout << "0" << endl;
+        return 0;
+    }
+    chmax(left, L);
+    chmin(right, R);
   }
-  
+  cout << right - left + 1 << endl;
+
   return 0;
 }
 

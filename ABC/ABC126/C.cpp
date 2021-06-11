@@ -37,15 +37,20 @@ vector<string> split(const string &str, char delim);
 int main()
 {
   __MAGIC__;
-  int N, M;
-  cin >> N >> N;
-  vi_t ng(N);
-  int a;
-  REP(i, M)
-  {
-    cin >> a;
+  ll N, K;
+  cin >> N >> K;
+
+  SET_PRECISION(10);
+  long double res=0;
+  for(ll i=1; i<=N; ++i) {
+    int x = std::ceil(log2( (long double)K/i));
+    x = max(x, 0);
+    res += powl(0.5, x);
   }
-  
+  res /= N;
+
+  cout << res << endl;
+
   return 0;
 }
 

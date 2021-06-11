@@ -38,14 +38,38 @@ int main()
 {
   __MAGIC__;
   int N, M;
-  cin >> N >> N;
-  vi_t ng(N);
-  int a;
-  REP(i, M)
-  {
-    cin >> a;
+  cin >> N >> M;
+  vector<bitset<10> > l(M);
+  int k, s;
+  REP(i, M) {
+    cin >> k;
+    REP(j, k) {
+      cin >> s;
+      --s;
+      l[i].set(s);
+    }
   }
-  
+  vi_t p(M);
+  for(auto& x : p) cin >> x;
+
+
+  ll res=0;
+  REP(i, (1<<N) ) {
+    bitset<10> state(i);
+    bool isOK = true;
+    //cout << state << " -> ";
+    REP(j, M) {
+      //cout << state << " && " << l[j] << " = " << (state & l[j]) << endl;
+      if( ( (state & l[j]).count() + p[j] ) % 2) {
+        isOK=false;
+        break;
+      }
+    }
+    //cout << (isOK ? "OK" : "No") << endl;
+    if (isOK) ++res;
+  }
+  cout << res << endl;
+
   return 0;
 }
 
