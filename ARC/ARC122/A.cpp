@@ -25,14 +25,11 @@ using vl_t  = vector<ll>;
 using vvl_t = vector<vector<ll> >;
 using pii_t = pair<int, int>;
 using pll_t = pair<ll, ll>;
-using mint = modint998244353;
-//using mint = modint1000000007;
-const ll INF = 1LL << 60;
+//using mint = modint998244353;
+using mint = modint1000000007;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
-template<class T> void print(T x) { cout << x << endl; }
-template<class T> void print(const vector<T>& v);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -40,9 +37,17 @@ template<class T> void print(const vector<T>& v);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  int N;
+  cin >> N;
+  vector<mint> A(N);
+  ll a;
+  REP(i, N) {
+    cin >> a;
+    A[i] = a;
+  }
+  dp
+
+
   return 0;
 }
 
@@ -68,11 +73,4 @@ vector<string> split(const string &str, char delim)
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
-}
-
-template<class T> void print(const vector<T>& v) {
-  for(const auto& x : v) {
-    cout << x << " ";
-  }
-  cout << endl;
 }

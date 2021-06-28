@@ -27,12 +27,9 @@ using pii_t = pair<int, int>;
 using pll_t = pair<ll, ll>;
 using mint = modint998244353;
 //using mint = modint1000000007;
-const ll INF = 1LL << 60;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
-template<class T> void print(T x) { cout << x << endl; }
-template<class T> void print(const vector<T>& v);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -40,9 +37,18 @@ template<class T> void print(const vector<T>& v);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll N;
+  cin >> N;
+
+  ll sum=0;
+  for(ll i=1; i<=N; ++i) {
+    sum += i;
+    if (sum >= N) {
+      cout << i << endl;
+      return 0;
+    }
+  }
+
   return 0;
 }
 
@@ -68,11 +74,4 @@ vector<string> split(const string &str, char delim)
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
-}
-
-template<class T> void print(const vector<T>& v) {
-  for(const auto& x : v) {
-    cout << x << " ";
-  }
-  cout << endl;
 }

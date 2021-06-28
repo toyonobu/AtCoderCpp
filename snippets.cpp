@@ -15,6 +15,18 @@ vi_t str2numvec(const std::string& str)
 //
 //
 //----------------------------------------------------------------
+template<typename T>
+vi_t to_unique(std::vector<T>& v)
+{
+  std::sort(v.begin(), v.end());
+  v.erase(std::unique(v.begin(), v.end()), v.end());
+}
+//----------------------------------------------------------------
+
+
+//
+//
+//----------------------------------------------------------------
 void strReplace(std::string& str, const std::string& from, const std::string& to) {
   std::string::size_type pos = 0;
   while(pos = str.find(from, pos), pos != std::string::npos) {

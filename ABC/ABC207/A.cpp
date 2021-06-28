@@ -31,8 +31,6 @@ const ll INF = 1LL << 60;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
-template<class T> void print(T x) { cout << x << endl; }
-template<class T> void print(const vector<T>& v);
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -40,9 +38,13 @@ template<class T> void print(const vector<T>& v);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  vi_t v(3);
+  cin >> v[0];
+  cin >> v[1];
+  cin >> v[2];
+  sort(ALL(v));
+  cout << v[1] + v[2] << endl;
+
   return 0;
 }
 
@@ -68,11 +70,4 @@ vector<string> split(const string &str, char delim)
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
-}
-
-template<class T> void print(const vector<T>& v) {
-  for(const auto& x : v) {
-    cout << x << " ";
-  }
-  cout << endl;
 }

@@ -27,12 +27,19 @@ using pii_t = pair<int, int>;
 using pll_t = pair<ll, ll>;
 using mint = modint998244353;
 //using mint = modint1000000007;
-const ll INF = 1LL << 60;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
-template<class T> void print(T x) { cout << x << endl; }
-template<class T> void print(const vector<T>& v);
+
+
+bool isKaibun(const vl_t& v)
+{
+  ll N = v.size();
+  REP(i, N/2) {
+    if( v[i] != v[N-i]) return false;
+  }
+  return true;
+}
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -40,9 +47,29 @@ template<class T> void print(const vector<T>& v);
 int main()
 {
   __MAGIC__;
-  
-  
-  
+  ll N;
+  cin >> N;
+  vl_t A(N);
+  for(auto& x : A) cin >> x;
+
+
+  map<ll, ll> rep;
+  ll res=0;
+  REP(i, N/2) {
+    auto l = A[i];
+    auto r = A[N-i-1];
+    l = rep.find(l)!=rep.end() ? rep[l] : l;
+    r = rep.find(r)!=rep.end() ? rep[r] : r;
+
+    cout << i << " -> " << l << ", "<< r << endl;
+    if(l != r) {
+      cout << "rep["<<r<<"] = "<<l<<endl;
+      rep[r] = l;
+      ++res;
+    }
+  }
+
+  cout << res << endl;
   return 0;
 }
 
@@ -68,11 +95,4 @@ vector<string> split(const string &str, char delim)
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
-}
-
-template<class T> void print(const vector<T>& v) {
-  for(const auto& x : v) {
-    cout << x << " ";
-  }
-  cout << endl;
 }

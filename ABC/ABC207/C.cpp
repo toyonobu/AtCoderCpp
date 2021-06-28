@@ -31,8 +31,22 @@ const ll INF = 1LL << 60;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
-template<class T> void print(T x) { cout << x << endl; }
-template<class T> void print(const vector<T>& v);
+
+
+bool overlapping(int t1, ll l1, ll r1, int t2, ll l2, ll r2) {
+  if(r1 < l2 || r2 < l1 ) {return false;
+  } else if ( r1==l2 ) {
+    if(t1==2 || t1==4) return false;
+    if(t2==3 || t2==4) return false;
+    //return true;
+  } else if ( r2==l1 ) {
+    if(t2==2 || t2==4) return false;
+    if(t1==3 || t1==4) return false;
+    //return true;
+  }
+  return true;
+}
+
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -40,8 +54,25 @@ template<class T> void print(const vector<T>& v);
 int main()
 {
   __MAGIC__;
+  int N;
+  cin >> N;
+  vi_t t(N);
+  vl_t l(N);
+  vl_t r(N);
+  REP(i, N) {
+    cin >> t[i] >> l[i] >> r[i];
+  }
   
-  
+  ll res=0;
+  REP(i, N-1) {
+    for(int j=i+1; j<N; ++j) {
+      if( overlapping(t[i], l[i], r[i], t[j], l[j], r[j]) ) {
+        ++res;
+      }
+    }
+  }
+  cout << res << endl;
+
   
   return 0;
 }
@@ -68,11 +99,4 @@ vector<string> split(const string &str, char delim)
   }
   res.push_back(string(str, current, str.size() - current));
   return res;
-}
-
-template<class T> void print(const vector<T>& v) {
-  for(const auto& x : v) {
-    cout << x << " ";
-  }
-  cout << endl;
 }
