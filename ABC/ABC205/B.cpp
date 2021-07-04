@@ -41,8 +41,12 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
+  int N;
+  cin >> N;
+  vi_t A(N);
+  for(auto& x : A) cin >> x;
+  set<int> S(ALL(A));
+  PRINT_YesNo(S.size()==A.size());
   
   return 0;
 }

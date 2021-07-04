@@ -41,9 +41,25 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  ll A, B, C;
+  cin >> A >> B >> C;
+
+  string res="";
+  if( A==B ) {
+    res = "=";
+  } else {
+    if( C%2 ) {
+      res = A > B ? ">" : "<";
+    } else {
+      if(abs(A)==abs(B)) {
+        res = "=";
+      } else {
+        res = abs(A) > abs(B) ? ">" : "<";
+      }
+    }
+  }
+  cout << res << endl;
+
   return 0;
 }
 

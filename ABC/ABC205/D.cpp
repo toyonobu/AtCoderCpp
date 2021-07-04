@@ -41,9 +41,28 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  ll N, Q;
+  cin >> N >> Q;
+  vl_t A(N);
+  vl_t dp(N);
+  REP(i, N) {
+    ll a; cin >> a;
+    A[i] = a;
+    dp[i] = a - (i+1);
+  }
+
+  REP(i, Q) {
+    ll K; cin >> K;
+    const int index = std::lower_bound(dp.begin(), dp.end(), K) - dp.begin();
+
+    if(index == N) {
+      cout << A[N-1] + (K - dp[N-1]) <<endl;
+    } else {
+      cout << A[index] - (dp[index] - K + 1) << endl;
+    }
+  }
+
+
   return 0;
 }
 

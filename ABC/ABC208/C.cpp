@@ -41,9 +41,19 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  ll N, K;
+  cin >> N >> K;
+  vl_t A(N);
+  for(auto& a : A) cin >> a;
+  vl_t B = A;
+  sort(ALL(B));
+  ll offset = K / N;
+  K = K % N;
+  ll threshold = B[K];
+  REP(i, N) {
+    cout << offset + ( A[i] < threshold? 1 : 0) << endl;
+  }
+
   return 0;
 }
 

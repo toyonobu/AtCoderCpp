@@ -41,9 +41,10 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  int A, B;
+  cin >> A >> B;
+  cout << A * B * 0.01 << endl;
+
   return 0;
 }
 

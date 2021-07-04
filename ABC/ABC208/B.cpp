@@ -34,6 +34,13 @@ vector<string> split(const string &str, char delim);
 template<class T> void print(T x) { cout << x << endl; }
 template<class T> void print(const vector<T>& v);
 
+ll factorial(ll n)
+{
+    if (n == 0)
+       return 1;
+    return n * factorial(n - 1);
+}
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
@@ -41,9 +48,16 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  ll P;
+  cin >> P;
+
+  ll res=0;
+  for(ll n=10; n>0; --n) {
+    res += P / factorial(n);
+    P = P % factorial(n);
+  }
+  cout << res << endl;
+
   return 0;
 }
 

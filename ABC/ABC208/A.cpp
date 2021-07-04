@@ -41,9 +41,11 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
+  int A, B;
+  cin >> A >> B;
   
-  
-  
+  PRINT_YesNo( (A <= B) && (B<=6*A));
+
   return 0;
 }
 
