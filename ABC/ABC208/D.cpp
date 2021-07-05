@@ -34,49 +34,39 @@ vector<string> split(const string &str, char delim);
 template<class T> void print(T x) { cout << x << endl; }
 template<class T> void print(const vector<T>& v);
 
-
-struct Edge {
-    ll to;
-    ll cost;
-};
-using P = pair<long, int>;
-using Graph = vector<vector<Edge>>;
-
-//void dijkstra(const Graph &G, int s, vector<long long> &dis, vector<int> &prev) {
-ll dijkstra(const Graph &G, ll s, ll t, ll k) {
-    int N = G.size();
-    vl_t dis(N, INF);
-    //prev.resize(N, -1); // 初期化
-    priority_queue<P, vector<P>, greater<P>> pq;
-    dis[s] = 0;
-    pq.emplace(dis[s], s);
-    while (!pq.empty()) {
-        P p = pq.top();
-        pq.pop();
-        int v = p.second;
-        if (dis[v] < p.first) {
-            continue;
-        }
-        if(v!=s && v!=t && !(v<k) ) continue;
-        for (auto &e : G[v]) {
-            if (dis[e.to] > dis[v] + e.cost) {
-                dis[e.to] = dis[v] + e.cost;
-                //prev[e.to] = v; // 頂点 v を通って e.to にたどり着いた
-                pq.emplace(dis[e.to], e.to);
-            }
-        }
-    }
-    return dis[t] < 1152921504606846970 ? dis[t] : 0;
-}
-
-vector<int> get_path(const vector<int> &prev, int t) {
-    vector<int> path;
-    for (int cur = t; cur != -1; cur = prev[cur]) {
-        path.push_back(cur);
-    }
-    reverse(path.begin(), path.end()); // 逆順なのでひっくり返す
-    return path;
-}
+//struct Edge {
+//    ll to;
+//    ll cost;
+//};
+//using P = pair<long, int>;
+//using Graph = vector<vector<Edge>>;
+//
+////void dijkstra(const Graph &G, int s, vector<long long> &dis, vector<int> &prev) {
+//ll dijkstra(const Graph &G, ll s, ll t, ll k) {
+//    int N = G.size();
+//    vl_t dis(N, INF);
+//    //prev.resize(N, -1); // 初期化
+//    priority_queue<P, vector<P>, greater<P>> pq;
+//    dis[s] = 0;
+//    pq.emplace(dis[s], s);
+//    while (!pq.empty()) {
+//        P p = pq.top();
+//        pq.pop();
+//        int v = p.second;
+//        if (dis[v] < p.first) {
+//            continue;
+//        }
+//        if(v!=s && v!=t && !(v<k) ) continue;
+//        for (auto &e : G[v]) {
+//            if (dis[e.to] > dis[v] + e.cost) {
+//                dis[e.to] = dis[v] + e.cost;
+//                //prev[e.to] = v; // 頂点 v を通って e.to にたどり着いた
+//                pq.emplace(dis[e.to], e.to);
+//            }
+//        }
+//    }
+//    return dis[t] < 1152921504606846970 ? dis[t] : 0;
+//}
 
 //=====================//
 //  メ  イ  ン  関  数  //　
@@ -87,32 +77,36 @@ int main()
   SET_PRECISION(15);
   int N, M;
   cin >> N >> M;
-  Graph G(N, vector<Edge>());
+  vvl_t dist(N, vl_t(N, INF));
   ll A, B, C;
   REP(i, M) {
     cin >> A >> B >> C;
-    G[A-1].push_back(Edge{B-1,C});
+    --A; --B;
+    dist[A][B] = C;
+  }
+
+  REP(s, N) {
+    REP(t, N) {
+      if(s==t) dist[s][t]=0;
+    }
   }
 
   ll res = 0;
-  REP(s, N) {
-    REP(t, N) {
-      if(s==t) continue;
-      REP(k, N) {
-        res += dijkstra(G, s, t, k+1);
+  REP(k, N) {
+    REP(s, N) {
+      REP(t, N) {
+        chmin(dist[s][t], dist[s][k]+dist[k][t]);
+      }
+    }
+    REP(s, N) {
+      REP(t, N) {
+        if( dist[s][t]<INF ) {
+          res += dist[s][t];
+        }
       }
     }
   }
   cout << res << endl;
-  //cout << dijkstra(G, 0, 1, 1) << endl;
-  //cout << dijkstra(G, 1, 2, 1) << endl;
-  //cout << dijkstra(G, 0, 2, 1) << endl;
-  //cout << dijkstra(G, 0, 1, 2) << endl;
-  //cout << dijkstra(G, 1, 2, 2) << endl;
-  //cout << dijkstra(G, 0, 2, 2) << endl;
-  //cout << dijkstra(G, 0, 1, 3) << endl;
-  //cout << dijkstra(G, 1, 2, 3) << endl;
-  //cout << dijkstra(G, 0, 2, 3) << endl;
 
   return 0;
 }
