@@ -25,10 +25,9 @@ using vl_t  = vector<ll>;
 using vvl_t = vector<vector<ll> >;
 using pii_t = pair<int, int>;
 using pll_t = pair<ll, ll>;
-//using mint = modint998244353;
-using mint = modint1000000007;
-//const ll INF = 1LL << 60;
-const ll INF = LLONG_MAX;
+using mint = modint998244353;
+//using mint = modint1000000007;
+const ll INF = 1LL << 60;
 
 vi_t str2numvec(const std::string& str);
 vector<string> split(const string &str, char delim);
@@ -42,9 +41,27 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  int N;
+  cin >> N;
+  vi_t a(N);
+  vi_t b(N);
+  vi_t c(N);
+  REP(i, N) {
+    cin >> a[i] >> b[i] >> c[i];
+  }
+
+  vvl_t dp(N, vl_t(3,0));
+  dp[0][0] = a[0];
+  dp[0][1] = b[0];
+  dp[0][2] = c[0];
+
+  for(int i=1; i<N; ++i) {
+    dp[i][0] = max(dp[i-1][1]+a[i], dp[i-1][2]+a[i]);
+    dp[i][1] = max(dp[i-1][0]+b[i], dp[i-1][2]+b[i]);
+    dp[i][2] = max(dp[i-1][0]+c[i], dp[i-1][1]+c[i]);
+  }
+  cout << max(dp[N-1][0], max(dp[N-1][1], dp[N-1][2])) << endl;
+
   return 0;
 }
 

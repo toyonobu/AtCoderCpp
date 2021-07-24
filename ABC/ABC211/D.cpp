@@ -9,7 +9,7 @@ using namespace atcoder;
 #pragma GCC optimize("unroll-loops") // ループ展開
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 
-
+#define PRINT_Vec(v) for(const auto& x : (v)) {cout << x << " ";}cout<<endl;
 #define PRINT_YesNo(condition) cout<<((condition)?"Yes":"No")<<endl
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))
@@ -35,6 +35,21 @@ vector<string> split(const string &str, char delim);
 template<class T> void print(T x) { cout << x << endl; }
 template<class T> void print(const vector<T>& v);
 
+vi_t bfs(const vvi_t& G, int from) {
+  vi_t dist(G.size(), INT_MAX);
+  queue<int> q;
+  q.push(from); dist[from]=0;
+  while(q.size()) {
+    int v = q.front(); q.pop();
+    for(auto u : G[v]) {
+      if(dist[u]!=INT_MAX) continue;
+      dist[u] = dist[v]+1;
+      q.push(u);
+    }
+  }
+  return dist;
+}
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
@@ -42,9 +57,20 @@ int main()
 {
   __MAGIC__;
   SET_PRECISION(15);
-  
-  
-  
+  ll N, M;
+  cin >> N >> M;
+  vvi_t G(N);
+  int a, b;
+  REP(i, M) {
+    cin >> a >> b;
+    --a;--b;
+    G[a].push_back(b);
+    G[b].push_back(a);
+  }
+
+  auto dist = bfs(G, 0);
+  PRINT_Vec(dist);
+
   return 0;
 }
 
