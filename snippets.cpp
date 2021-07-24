@@ -162,7 +162,6 @@ void dfs(const Graph &G, int v) {
 // となって返ってくる
 //　計算量：O()   N:頂点数, M:辺数
 //----------------------------------------------------------------
-//----------------------------------------------------------------
 vi_t bfs(const vvi_t& G, int from) {
   vi_t dist(G.size(), INT_MAX);
   queue<int> q;
@@ -176,4 +175,27 @@ vi_t bfs(const vvi_t& G, int from) {
     }
   }
   return dist;
+}
+
+
+//----------------------------------------------------------------
+// 重さ W_i, 価値 V_i の商品iを
+// vector<pii_t> v // [重さ, 価値]
+// に詰めておいて、商品一覧からいくつか商品を選んでW以内に収める
+// という典型的なナップサック問題を解くコード
+//----------------------------------------------------------------
+ll knapsack(const vector<pii_t>& v, int w){
+  int n = v.size();
+  vvl_t dp(n+1, vl_t(w+1, 0));
+  for(int i=1;i<n+1;i++) {
+    for(int j=1;j<w+1;j++){
+      if(v[i-1].first<=j){
+        dp[i][j]=max(v[i-1].second+dp[i-1][j-v[i-1].first],dp[i-1][j]);
+      }
+      else{
+        dp[i][j]=dp[i-1][j];
+      }
+    }
+  }
+  return dp[n][w];
 }

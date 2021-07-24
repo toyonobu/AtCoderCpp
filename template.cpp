@@ -30,8 +30,6 @@ using mint = modint1000000007;
 //const ll INF = 1LL << 60;
 const ll INF = LLONG_MAX;
 
-vi_t str2numvec(const std::string& str);
-vector<string> split(const string &str, char delim);
 template<class T> void print(T x) { cout << x << endl; }
 template<class T> void print(const vector<T>& v);
 
@@ -51,27 +49,6 @@ int main()
 //-----------------------------
 // ヘルパー関数群
 //-----------------------------
-vi_t str2numvec(const std::string& str)
-{
-  vi_t v(str.size());
-  for(int i=0, n=str.size(); i<n; ++i) {
-      v[i] = str[i] - '0';
-  }
-  return v;
-}
-
-vector<string> split(const string &str, char delim)
-{
-  vector<string> res;
-  size_t current = 0, found;
-  while((found = str.find_first_of(delim, current)) != string::npos){
-    res.push_back(string(str, current, found - current));
-    current = found + 1;
-  }
-  res.push_back(string(str, current, str.size() - current));
-  return res;
-}
-
 template<class T> void print(const vector<T>& v) {
   for(const auto& x : v) {
     cout << x << " ";

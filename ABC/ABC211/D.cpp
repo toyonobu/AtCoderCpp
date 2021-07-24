@@ -9,7 +9,6 @@ using namespace atcoder;
 #pragma GCC optimize("unroll-loops") // ループ展開
 #define __MAGIC__ ios::sync_with_stdio(false);cin.tie(nullptr)
 
-#define PRINT_Vec(v) for(const auto& x : (v)) {cout << x << " ";}cout<<endl;
 #define PRINT_YesNo(condition) cout<<((condition)?"Yes":"No")<<endl
 #define PRINT_YESNO(condition) cout<<((condition)?"YES":"NO")<<endl
 #define SET_PRECISION(x) cout<< fixed << setprecision((x))

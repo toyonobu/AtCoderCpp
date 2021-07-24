@@ -34,6 +34,22 @@ vector<string> split(const string &str, char delim);
 template<class T> void print(T x) { cout << x << endl; }
 template<class T> void print(const vector<T>& v);
 
+ll knapsack(const vector<pii_t>& v, int w){
+  int n = v.size();
+  vvl_t dp(n+1, vl_t(w+1, 0));
+  for(int i=1;i<n+1;i++) {
+    for(int j=1;j<w+1;j++){
+      if(v[i-1].first<=j){
+        dp[i][j]=max(v[i-1].second+dp[i-1][j-v[i-1].first],dp[i-1][j]);
+      }
+      else{
+        dp[i][j]=dp[i-1][j];
+      }
+    }
+  }
+  return dp[n][w];
+}
+
 //=====================//
 //  メ  イ  ン  関  数  //　
 //=====================//
@@ -43,21 +59,11 @@ int main()
   SET_PRECISION(15);
   int N, W;
   cin >> N >> W;
-  vi_t w(N);
-  vl_t v(N);
-  REP(i, N) {
-    cin >> w[i] >> v[i];
-  }
+  vector<pii_t> v(N);
+  for(auto& [a, b] : v) cin >> a >> b;
 
-  vvl_t dp(N, vl_t(W+1, 0));
-
-  dp[0][w[0]]=v[0];
-  for(int i=1; i<N; ++i) {
-    for(int j=0; j<=W; ++j) {
-      dp[i][j] = j-w[i]>=0 ? max(dp[i-1][j], dp[i-1][j-w[i]] + v[i]) : dp[i-1][j];
-    }
-  }
-  cout << dp[N-1][W] << endl;
+  ll res = knapsack(v, W);
+  cout << res << endl;
 
   return 0;
 }
