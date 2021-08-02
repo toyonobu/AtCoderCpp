@@ -2,7 +2,9 @@
 .vscode
 
 # test file
-
+a.out
+input.txt
+test
 
 # Prerequisites
 *.d
