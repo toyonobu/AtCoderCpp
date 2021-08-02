@@ -199,3 +199,36 @@ ll knapsack(const vector<pii_t>& v, int w){
   }
   return dp[n][w];
 }
+
+//----------------------------------------------------------------
+// Longest Common Subsequence
+// 共通部分文字列を返す
+// 計算量：O(|S||T|)
+//----------------------------------------------------------------
+string lcs(const string& S, const string& T)
+{
+  vvi_t dp(S.size()+1, vi_t(T.size()+1, 0));
+  REP(i, S.size()) {
+    REP(j, T.size()) {
+      if(S[i]==T[j]) dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j]+1);
+      dp[i+1][j+1] = max(dp[i+1][j+1], dp[i+1][j]);
+      dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j+1]);
+    }
+  }
+
+  int len =  dp[S.size()][T.size()];
+  int i=S.size()-1;
+  int j=T.size()-1;
+  string res = "";
+  while(len > 0) {
+    if( S[i]==T[j] ) {
+      res = S[i] + res;
+      --i; --j; --len;
+    } else if(dp[i+1][j+1]==dp[i][j+1]) {
+      --i;
+    } else {
+      --j;
+    }
+  }
+  return res;
+}

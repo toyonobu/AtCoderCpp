@@ -35,7 +35,7 @@ template<class T> void print(const vector<T>& v);
 
 // Longest Common Subsequence
 // 計算量：O(|S||T|)
-int lcs(const string& S, const string& T)
+pair<int, string> lcs(const string& S, const string& T)
 {
   vvi_t dp(S.size()+1, vi_t(T.size()+1, 0));
   REP(i, S.size()) {
@@ -45,7 +45,22 @@ int lcs(const string& S, const string& T)
       dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j+1]);
     }
   }
-  return dp[S.size()][T.size()];
+
+  int len =  dp[S.size()][T.size()];
+  int i=S.size()-1;
+  int j=T.size()-1;
+  string res = "";
+  while(len > 0) {
+    if( S[i]==T[j] ) {
+      res = S[i] + res;
+      --i; --j; --len;
+    } else if(dp[i+1][j+1]==dp[i][j+1]) {
+      --i;
+    } else {
+      --j;
+    }
+  }
+  return {dp[S.size()][T.size()], res};
 }
 
 //=====================//
@@ -58,8 +73,8 @@ int main()
   string S, T;
   cin >> S >> T;
   
-  int res = lcs(S, T);
-  cout << res << endl;
+  auto res = lcs(S, T);
+  cout << res.second << endl;
   
   return 0;
 }
