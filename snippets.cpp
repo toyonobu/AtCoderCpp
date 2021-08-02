@@ -143,7 +143,7 @@ string dec2Naray(ll x, int n)
 //  }
 //----------------------------------------------------------------
 vector<bool> seen;
-void dfs(const Graph &G, int v) {
+void dfs(const vvi_t& G, int v) {
     seen[v] = true; // v を訪問済にする
 
     // v から行ける各頂点 next_v について
@@ -177,6 +177,41 @@ vi_t bfs(const vvi_t& G, int from) {
   return dist;
 }
 
+//----------------------------------------------------------------
+// トポロジカルソート
+// DAGから入力次数が0の頂点を1つ取り除いたグラフは
+// 必ずDAGであるという性質を利用する
+// 計算量：計算量：O(N+M)   N:頂点数, M:辺数
+//----------------------------------------------------------------
+vi_t topological_sort(const vvi_t& G) {
+  vi_t res;
+  const int N = G.size();
+  stack<int> S;
+  vi_t degree(N, 0);
+
+  // 拡頂点の入力次数を計算 O(|E|)
+  for(const auto& edges : G) {
+    for(const auto& edge : edges) {
+      ++degree[edge];
+    }
+  }
+
+  // 入力次数 == 0 の頂点を計算 O(|V|)
+  REP(i, N) {
+    if(degree[i]==0) S.push(i);
+  }
+
+  while ( S.size()>0)
+  {
+    int u = S.top(); S.pop();
+    res.emplace_back(u);
+    for(const auto& v : G[u]) {
+      --degree[v];
+      if( degree[v]==0 ) S.push(v);
+    }
+  }
+  return res;
+}
 
 //----------------------------------------------------------------
 // 重さ W_i, 価値 V_i の商品iを
