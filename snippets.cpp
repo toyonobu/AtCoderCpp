@@ -23,6 +23,27 @@ vi_t to_unique(std::vector<T>& v)
 }
 //----------------------------------------------------------------
 
+//----------------------------------------------------------------
+// 座標圧縮を行う
+//　計算量：O( N logN )
+//----------------------------------------------------------------
+// 具体例
+// v : [3 1 5 3 7 1]
+// → X=[1 0 2 1 3 1], vals=[1 3 5 7]
+//----------------------------------------------------------------
+template <typename T>
+vector<T> compress_vector(const vector<T>& v) {
+  vector<T> X = v;
+  vector<T> vals = v;
+  sort(vals.begin(), vals.end());
+  vals.erase(unique(vals.begin(), vals.end()), vals.end());
+  for (int i = 0; i < (int)X.size(); i++) {
+      X[i] = lower_bound(vals.begin(), vals.end(), X[i]) - vals.begin();
+  }
+  // 元の値がいくつだったか復元したい場合はvalsも一緒に返す
+  // v[i] = vals[X[i]]
+  return X;
+}
 
 //
 //
@@ -90,7 +111,7 @@ std::string trimRightSpace(const std::string& str)
 
 
 //
-// 高速 O(sqrt(n)) でnの約数を昇順で列挙する
+// 高速 O(sqrt(n)) で n の約数を昇順で列挙する
 //----------------------------------------------------------------
 vl_t divisor(ll n)
 {
@@ -143,7 +164,8 @@ string dec2Naray(ll x, int n)
 //  }
 //----------------------------------------------------------------
 vector<bool> seen;
-void dfs(const vvi_t& G, int v) {
+template<class T>
+void dfs(const vector<vector<T> >& G, T v) {
     seen[v] = true; // v を訪問済にする
 
     // v から行ける各頂点 next_v について
@@ -154,6 +176,21 @@ void dfs(const vvi_t& G, int v) {
 }
 //----------------------------------------------------------------
 
+
+//----------------------------------------------------------------
+// DFS のアルゴリズムにしたがって、探索したパスを取得する
+//　計算量：O(N+M)   N:頂点数, M:辺数
+//----------------------------------------------------------------
+template<class T>
+void dfs_path(vector<T>& path, const vector<vector<T>>& G,
+              T v, T parent) {
+  path.push_back(v);
+  for(auto& next : G[v]) {
+    if(next==parent) continue;
+    dfs_path(path, G, next, v);
+    path.push_back(v);//帰り道も保存する場合
+  }
+}
 
 //----------------------------------------------------------------
 // 各辺の重みが1である隣接リスト表記のグラフに対して
