@@ -42,33 +42,15 @@ int main()
   SET_PRECISION(15);
   int N;
   cin >> N;
-  vector<double> p(N);
-  for (auto& x : p) {
-    cin >> x;
-  }
+  vi_t A(N);
+  for(auto& a : A) cin >> a;
 
-  // i番目までのコインで表がj枚出る確率 : dp[i][j]
-  vector<vector<double>> dp(N+1, vector<double>(N+1,0));
-
-  dp[0][0] = 1.;
-
-  for(int i=1; i<=N; ++i) {
-    dp[i][0] = dp[i-1][0] * (1-p[i-1]);
-    for(int j=1; j<=i; ++j) {
-      dp[i][j] = dp[i-1][j-1]*p[i-1] + dp[i-1][j]*(1-p[i-1]);
-      dp[i][j] = dp[i-1][j-1]*p[i-1] + dp[i-1][j]*(1-p[i-1]);
-    }
-  }
-
-  //REP(i, N+1) {
-  //  print(dp[i]);
-  //}
-
-  double res=0;
-  for(int i=N; i>0.5*N; --i) {
-    res += dp[N][i];
-  }
-  cout << res << endl;
+  // 残り1個の皿の枚数=c1
+  // 残り2個の皿の枚数=c2
+  // 残り3個の皿の枚数=c3
+  // と置き、dp[c1][c2][c3]をその状態
+  // に遷移するまでにまでに必要な試行回数の期待値と置く
+  
 
   return 0;
 }
